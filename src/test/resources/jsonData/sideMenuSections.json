@@ -1,0 +1,10 @@
+{
+  "home": "/",
+  "orders": "/order/list?type=new",
+  "orderParams": "/order/param/list",
+  "users": "/user/list",
+  "clients": "/client/list",
+  "departments": "/department/list",
+  "proposalTemplates": "/proposal/template/list",
+  "proposalParams": "/proposal/param/list"
+}

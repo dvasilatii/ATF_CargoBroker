@@ -1,0 +1,42 @@
+[
+  {
+    "type": "selectableOption",
+    "selector": "select[name=\"param[id_14]\"]",
+    "value": "Albania"
+  },
+  {
+    "type": "selectableOption",
+    "selector": "select[name=\"param[id_1]\"]",
+    "value": "Brazil"
+  },
+  {
+    "type": "address",
+    "selector": "input[name=\"param[id_2]\"]",
+    "value": "Rruga Ibrahim Rugova, Tirana"
+  },
+  {
+    "type": "address",
+    "selector": "input[name=\"param[id_4]\"]",
+    "value": "Loteamento Novo São Caetano 1964, Itabuna"
+  },
+  {
+    "type": "text",
+    "selector": "textarea[placeholder=\"Physical characteristics\"]",
+    "value": "Liquid Bulk"
+  },
+  {
+    "type": "date",
+    "selector": "input[type=\"date\"]",
+    "value": "13-07-2024"
+  },
+  {
+    "type": "selectableOption",
+    "selector": ".quark-input[name=\"param[id_11]\"]",
+    "value": "Isotherm"
+  },
+  {
+    "type": "price",
+    "selector": "input[type=\"number\"]",
+    "value": "1580.00"
+  }
+]
