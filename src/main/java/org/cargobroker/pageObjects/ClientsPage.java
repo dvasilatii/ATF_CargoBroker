@@ -9,6 +9,7 @@ public class ClientsPage extends PageUtils {
     private WebElement createClient;
     @FindBy(css = "div[class=\"quark-message ok fa fa-check-circle\"]")
     private WebElement clientSuccessfullyCreatedMessage;
+
     public ClientsPage() {
         initWebElements();
     }
@@ -16,7 +17,9 @@ public class ClientsPage extends PageUtils {
     public void createNewClient() {
         clickOnElement(createClient);
     }
+
     public String verifyClientConfirmationMessage() {
+        waitWebElement(clientSuccessfullyCreatedMessage);
         return clientSuccessfullyCreatedMessage.getText();
     }
 

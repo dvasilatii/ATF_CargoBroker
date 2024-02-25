@@ -5,11 +5,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class ClientCreationPage extends PageUtils {
-    @FindBy(xpath = "//input[@placeholder=\"Organization]\"]")
+    @FindBy(xpath = "//input[@placeholder=\"Organization\"]")
     private WebElement organizationField;
     @FindBy(css = "input[placeholder=\"Spokesperson\"]")
     private WebElement spokespersonField;
-    @FindBy(css = "//input[@placeholder=\"Contact E-mail\"]")
+    @FindBy(xpath = "//input[@placeholder=\"Contact E-mail\"]")
     private WebElement emailField;
     @FindBy(css = "input[placeholder=\"Contact phone\"]")
     private WebElement contactPhoneField;
@@ -19,6 +19,16 @@ public class ClientCreationPage extends PageUtils {
     private WebElement createClientButton;
     public ClientCreationPage() {
         initWebElements();
+    }
+
+    public void fillOrganizationDetails(String organization, String spokesperson) {
+        enterFieldValue(organizationField, organization);
+        enterFieldValue(spokespersonField, spokesperson);
+    }
+    public void fillContactDetails(String email, String phone, String address) {
+        enterFieldValue(emailField, email);
+        enterFieldValue(contactPhoneField, phone);
+        enterFieldValue(contactAddressField, address);
     }
 
     public void createClientWithParams() {

@@ -6,27 +6,26 @@ import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends PageUtils {
 
-    @FindBy (name = "email")
+    @FindBy(name = "email")
     private WebElement enterEmailField;
-    @FindBy (name = "password")
+    @FindBy(name = "password")
     private WebElement enterPasswordField;
-    @FindBy (css = "button[type=\"submit\"]")
+    @FindBy(css = "button[type=\"submit\"]")
     private WebElement loginButton;
 
     public LoginPage() {
-
         initWebElements();
     }
 
-    public void enterEmail (String value) {
-
+    public void enterEmail(String value) {
         enterFieldValue(enterEmailField, value);
     }
-    public void enterPassword (String value) {
 
+    public void enterPassword(String value) {
         enterFieldValue(enterPasswordField, value);
     }
-    public void clickOnLogin () {
+
+    public void clickOnLogin() {
         clickOnElement(loginButton);
     }
 }

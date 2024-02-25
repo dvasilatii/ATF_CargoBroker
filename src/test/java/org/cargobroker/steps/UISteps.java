@@ -1,5 +1,6 @@
 package org.cargobroker.steps;
 
+import com.github.javafaker.Faker;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -15,6 +16,7 @@ public class UISteps {
     OrderCreationPage orderCreationPage = new OrderCreationPage();
     ClientsPage clientsPage = new ClientsPage();
     ClientCreationPage clientCreationPage = new ClientCreationPage();
+    //TODO: don't initialize at the same time
 
     @Given("user log in")
     public void userLogIn() {
@@ -24,7 +26,7 @@ public class UISteps {
     }
 
     @And("user navigates to {string} section")
-    public void userNavigatesToOrdersSection(String section) {
+    public void userNavigatesToSection(String section) {
         PageUtils.navigateTo(section);
     }
 
@@ -52,5 +54,34 @@ public class UISteps {
     public void orderSuccessfullyCreatedMessageIsDisplayed(String message) {
         String orderConfirmMessage = ordersPage.verifyOrderConfirmationMessage();
         Assert.assertTrue(orderConfirmMessage.equalsIgnoreCase(message));
+    }
+    @And("\"create\" new client button is clicked")
+    public void createClient() {
+        clientsPage.createNewClient();
+    }
+
+    @When("user fills client details")
+    public void userFillsClientDetails() {
+        Faker faker = new Faker();
+        clientCreationPage.fillOrganizationDetails(
+                faker.company().name(),
+                faker.name().fullName()
+        );
+        clientCreationPage.fillContactDetails(
+                faker.internet().emailAddress(),
+                faker.regexify("\\+[0-9]{11,}"),
+                faker.address().fullAddress()
+        );
+    }
+
+    @Then("user submits new client")
+    public void userSubmitsNewClient() {
+        clientCreationPage.createClientWithParams();
+    }
+
+    @And("{string} message is displayed on Clients page")
+    public void clientSuccessfullyCreatedMessageIsDisplayedOnClientsPage(String message) {
+        String clientConfirmMessage = clientsPage.verifyClientConfirmationMessage();
+        Assert.assertTrue(clientConfirmMessage.equalsIgnoreCase(message));
     }
 }

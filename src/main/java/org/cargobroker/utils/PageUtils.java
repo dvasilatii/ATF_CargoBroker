@@ -17,6 +17,7 @@ import java.util.HashMap;
 
 public abstract class PageUtils {
     private static WebDriver driver;
+
     public static WebDriver getDriver() {
         if (driver == null) {
             String browserName = Utils.getProperty("browser");
@@ -33,48 +34,52 @@ public abstract class PageUtils {
         }
         return driver;
     }
+
     public void initWebElements() {
         PageFactory.initElements(driver, this);
     }
+
     public void waitWebElement(WebElement findBy) {
         try {
             int duration = Integer.parseInt(Utils.getProperty("waiterDuration"));
             WebDriverWait w = new WebDriverWait(driver, Duration.ofSeconds(duration));
             w.until(ExpectedConditions.visibilityOf(findBy));
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.getMessage(); // TODO: implement logger
         }
     }
+
     public void waitElementToDisappear(WebElement element) {
         try {
             int duration = Integer.parseInt(Utils.getProperty("waiterDuration"));
             WebDriverWait w = new WebDriverWait(driver, Duration.ofSeconds(duration));
             w.until(ExpectedConditions.invisibilityOf(element));
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.getMessage(); // TODO: implement logger
         }
     }
+
     public static void navigateTo(String section) {
         HashMap<String, String> sideMenu = Utils.parseJson(
-    System.getProperty("user.dir") + "/src/test/resources/jsonData/sideMenuSections.json"
+                System.getProperty("user.dir") + "/src/test/resources/jsonData/sideMenuSections.json"
         );
         try {
             String url = sideMenu.get(section);
             driver.findElement(By.cssSelector("#presence-menu-side a[href='" + url + "']")).click();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.getMessage(); // TODO: implement logger
         }
     }
+
     public void selectItemFromDropdown(WebElement field, String value) {
         Select selectField = new Select(field);
         selectField.selectByVisibleText(value);
     }
+
     public void enterFieldValue(WebElement field, String value) {
         field.sendKeys(value);
     }
+
     public void clickOnElement(WebElement element) {
         element.click();
     }
