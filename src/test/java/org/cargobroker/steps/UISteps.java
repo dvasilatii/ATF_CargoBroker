@@ -5,24 +5,28 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import lombok.extern.log4j.Log4j2;
 import org.cargobroker.pageObjects.*;
 import org.cargobroker.utils.PageUtils;
 import org.cargobroker.utils.Utils;
 import org.testng.Assert;
 
+import java.util.ArrayList;
+import java.util.List;
+@Log4j2
 public class UISteps {
     LoginPage loginPage = new LoginPage();
     OrdersPage ordersPage = new OrdersPage();
     OrderCreationPage orderCreationPage = new OrderCreationPage();
     ClientsPage clientsPage = new ClientsPage();
     ClientCreationPage clientCreationPage = new ClientCreationPage();
-    //TODO: don't initialize at the same time
 
     @Given("user log in")
     public void userLogIn() {
         loginPage.enterEmail(Utils.getProperty("username"));
         loginPage.enterPassword(Utils.getProperty("password"));
         loginPage.clickOnLogin();
+        log.info("user successfully logged in");
     }
 
     @And("user navigates to {string} section")
@@ -54,6 +58,7 @@ public class UISteps {
     public void orderSuccessfullyCreatedMessageIsDisplayed(String message) {
         String orderConfirmMessage = ordersPage.verifyOrderConfirmationMessage();
         Assert.assertTrue(orderConfirmMessage.equalsIgnoreCase(message));
+        log.info("order was successfully created");
     }
     @And("\"create\" new client button is clicked")
     public void createClient() {
@@ -83,5 +88,6 @@ public class UISteps {
     public void clientSuccessfullyCreatedMessageIsDisplayedOnClientsPage(String message) {
         String clientConfirmMessage = clientsPage.verifyClientConfirmationMessage();
         Assert.assertTrue(clientConfirmMessage.equalsIgnoreCase(message));
+        log.info("client was successfully created");
     }
 }

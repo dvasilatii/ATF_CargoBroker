@@ -1,4 +1,4 @@
-@UI @Run
+@UI
 Feature: Client management
 
   Scenario: Client is created

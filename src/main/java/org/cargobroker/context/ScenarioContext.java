@@ -15,12 +15,10 @@ public class ScenarioContext {
     }
 
     public void saveData(DataKeys key, Object value) {
-
         CONTEXT.put(key, value);
     }
 
     public <T> T getData(DataKeys key) {
-
         return (T) CONTEXT.get(key);
     }
 }
