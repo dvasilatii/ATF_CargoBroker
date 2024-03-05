@@ -1,4 +1,4 @@
-@UI @Run
+@UI
 Feature: Place the order procedure
 
   Scenario Outline: Order is created

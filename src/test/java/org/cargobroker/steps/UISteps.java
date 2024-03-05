@@ -26,7 +26,9 @@ public class UISteps {
         loginPage.enterEmail(Utils.getProperty("username"));
         loginPage.enterPassword(Utils.getProperty("password"));
         loginPage.clickOnLogin();
+
         log.info("user successfully logged in");
+        PageUtils.takeScreenshot("userIsLogged");
     }
 
     @And("user navigates to {string} section")
@@ -58,7 +60,9 @@ public class UISteps {
     public void orderSuccessfullyCreatedMessageIsDisplayed(String message) {
         String orderConfirmMessage = ordersPage.verifyOrderConfirmationMessage();
         Assert.assertTrue(orderConfirmMessage.equalsIgnoreCase(message));
+
         log.info("order was successfully created");
+        PageUtils.takeScreenshot("orderIsCreated");
     }
     @And("\"create\" new client button is clicked")
     public void createClient() {
@@ -88,6 +92,9 @@ public class UISteps {
     public void clientSuccessfullyCreatedMessageIsDisplayedOnClientsPage(String message) {
         String clientConfirmMessage = clientsPage.verifyClientConfirmationMessage();
         Assert.assertTrue(clientConfirmMessage.equalsIgnoreCase(message));
+
         log.info("client was successfully created");
+        PageUtils.takeScreenshot("clientIsCreated");
     }
+
 }

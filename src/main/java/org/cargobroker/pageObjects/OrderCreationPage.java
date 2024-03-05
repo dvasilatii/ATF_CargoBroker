@@ -49,17 +49,16 @@ public class OrderCreationPage extends PageUtils {
 
             WebElement element = getDriver().findElement(By.cssSelector(param.get("selector")));
 
-            switch (param.get("type")) {
-                case "selectableOption":
-                    selectItemFromDropdown(element, param.get("value"));
-                    break;
-                /*case "text":
-                case "address":
-                case "date":
-                case "price":*/
-                default:
-                    enterFieldValue(element, param.get("value"));
-                    break;
+            if (param.get("type").equals("selectableOption")) {
+                selectItemFromDropdown(element, param.get("value"));
+            } else {
+                /*
+                 * case "text":
+                 * case "address":
+                 * case "date":
+                 * case "price":
+                 */
+                enterFieldValue(element, param.get("value"));
             }
         }
     }

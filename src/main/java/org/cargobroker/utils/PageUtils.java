@@ -69,7 +69,9 @@ public abstract class PageUtils {
         try {
             String url = sideMenu.get(section);
             driver.findElement(By.cssSelector("#presence-menu-side a[href='" + url + "']")).click();
+
             log.info("user is redirected to " + section + " section");
+            PageUtils.takeScreenshot("userNavigatedTo_" + section);
         } catch (Exception e) {
             log.error(e.getMessage());
             throw new RuntimeException(e);
