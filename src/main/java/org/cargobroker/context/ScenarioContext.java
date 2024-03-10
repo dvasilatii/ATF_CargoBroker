@@ -11,6 +11,7 @@ public class ScenarioContext {
         if (scenarioInstance == null) {
             scenarioInstance = new ScenarioContext();
         }
+
         return scenarioInstance;
     }
 

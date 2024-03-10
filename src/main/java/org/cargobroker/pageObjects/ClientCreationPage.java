@@ -17,6 +17,7 @@ public class ClientCreationPage extends PageUtils {
     private WebElement contactAddressField;
     @FindBy(css = ".quark-button.block.ok[type=\"submit\"]")
     private WebElement createClientButton;
+
     public ClientCreationPage() {
         initWebElements();
     }
@@ -25,6 +26,7 @@ public class ClientCreationPage extends PageUtils {
         enterFieldValue(organizationField, organization);
         enterFieldValue(spokespersonField, spokesperson);
     }
+
     public void fillContactDetails(String email, String phone, String address) {
         enterFieldValue(emailField, email);
         enterFieldValue(contactPhoneField, phone);
@@ -34,5 +36,4 @@ public class ClientCreationPage extends PageUtils {
     public void createClientWithParams() {
         clickOnElement(createClientButton);
     }
-
 }

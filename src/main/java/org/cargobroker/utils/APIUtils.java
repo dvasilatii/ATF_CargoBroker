@@ -27,6 +27,5 @@ public class APIUtils {
             default:
                 throw new RuntimeException(method + "- is not a valid request method");
         }
-
     }
 }

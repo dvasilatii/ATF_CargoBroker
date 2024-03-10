@@ -14,4 +14,3 @@ Feature: Bid management
     Then user log in
     And user navigates to 'orders' section
     And placed bid is added to the selected order
-

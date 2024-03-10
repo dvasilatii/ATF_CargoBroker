@@ -35,6 +35,7 @@ public abstract class PageUtils {
                 driver = new EdgeDriver();
             }
         }
+
         return driver;
     }
 
@@ -63,9 +64,8 @@ public abstract class PageUtils {
     }
 
     public static void navigateTo(String section) {
-        HashMap<String, String> sideMenu = Utils.parseJson(
-                System.getProperty("user.dir") + "/src/test/resources/jsonData/sideMenuSections.json"
-        );
+        HashMap<String, String> sideMenu = Utils.parseJson(Utils.getProperty("pathToMenuSections"));
+
         try {
             String url = sideMenu.get(section);
             driver.findElement(By.cssSelector("#presence-menu-side a[href='" + url + "']")).click();
@@ -79,8 +79,8 @@ public abstract class PageUtils {
     }
 
     public static void takeScreenshot(String id) {
-        File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        String date = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss").format(LocalDateTime.now());
+        File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        String date = DateTimeFormatter.ofPattern(Utils.getProperty("screenshotDateFormat")).format(LocalDateTime.now());
         String location = Utils.getProperty("pathToEvidence") + "/" + date + "_" + id + Utils.getProperty("screenshotExtension");
 
         try {
@@ -96,16 +96,17 @@ public abstract class PageUtils {
             log.error("can't select '" + value + "' from dropdown");
             return;
         }
+
         Select selectField = new Select(field);
         selectField.selectByVisibleText(value);
     }
-
 
     public void enterFieldValue(WebElement field, String value) {
         if (field == null) {
             log.error("field can't be filled with '" + value + "'");
             return;
         }
+
         field.sendKeys(value);
     }
 
@@ -114,6 +115,12 @@ public abstract class PageUtils {
             log.error("element can't be clicked");
             return;
         }
+
         element.click();
+    }
+
+    public static void quit() {
+        driver.quit();
+        driver = null;
     }
 }

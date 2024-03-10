@@ -8,7 +8,6 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 public class OrdersPage extends PageUtils {
-
     @FindBy(xpath = "//a[@href=\"/order/create\"]")
     private WebElement createOrderButton;
     @FindBy(css = "div[class=\"quark-message ok fa fa-check-circle\"]")

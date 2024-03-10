@@ -23,7 +23,7 @@ public class Hooks {
             PageUtils.takeScreenshot("failedTest_" + scenario.getName().replace(' ', '_'));
         }
 
-        PageUtils.getDriver().quit();
+        PageUtils.quit();
     }
 
     @Before("@DB")

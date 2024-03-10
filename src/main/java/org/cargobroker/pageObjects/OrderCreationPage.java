@@ -33,9 +33,7 @@ public class OrderCreationPage extends PageUtils {
     }
 
     public void fillOrderParams() {
-        List<HashMap<String, String>> params = Utils.parseJson(
-                System.getProperty("user.dir") + "/src/test/resources/jsonData/newOrderParams.json"
-        );
+        List<HashMap<String, String>> params = Utils.parseJson(Utils.getProperty("pathToOrderParams"));
 
         if (params == null) {
             log.error("can't retrieve order params");
@@ -62,5 +60,4 @@ public class OrderCreationPage extends PageUtils {
             }
         }
     }
-
 }

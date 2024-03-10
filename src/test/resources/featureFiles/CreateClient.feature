@@ -1,4 +1,4 @@
-@UI @DB @Run
+@UI @DB
 Feature: Client management
 
   Scenario: Client is created
@@ -9,4 +9,3 @@ Feature: Client management
     Then user submits new client
     And 'Client successfully created' message is displayed on Clients page
     And created client exists in database
-

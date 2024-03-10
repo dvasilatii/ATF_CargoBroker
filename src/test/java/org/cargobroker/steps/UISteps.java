@@ -14,9 +14,6 @@ import org.cargobroker.utils.Utils;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Log4j2
 public class UISteps {
     private static final ScenarioContext CONTEXT = ScenarioContext.getScenarioInstance();

@@ -10,6 +10,5 @@ public enum DataKeys {
     CLIENT_SPOKESPERSON,
     CLIENT_EMAIL,
     CLIENT_ADDRESS,
-    CLIENT_PHONE,
-
+    CLIENT_PHONE
 }

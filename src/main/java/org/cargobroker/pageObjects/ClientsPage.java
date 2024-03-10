@@ -22,5 +22,4 @@ public class ClientsPage extends PageUtils {
         waitWebElement(clientSuccessfullyCreatedMessage);
         return clientSuccessfullyCreatedMessage.getText();
     }
-
 }

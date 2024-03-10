@@ -7,11 +7,12 @@ import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.Properties;
+
 @Log4j2
 public class Utils {
     private static Properties properties;
+
     public static String getProperty (String property) {
         if (properties == null) {
             try {
@@ -24,8 +25,10 @@ public class Utils {
                 throw new RuntimeException(e);
             }
         }
+
         return properties.getProperty(property);
     }
+
     public static <T> T parseJson(String filePath) {
         try {
             String jsonContent = FileUtils.readFileToString(new File(filePath));
