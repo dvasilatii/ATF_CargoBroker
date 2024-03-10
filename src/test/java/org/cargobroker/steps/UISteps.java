@@ -78,15 +78,20 @@ public class UISteps {
     @When("user fills client details")
     public void userFillsClientDetails() {
         Faker faker = new Faker();
-        clientCreationPage.fillOrganizationDetails(
-                faker.company().name(),
-                faker.name().fullName()
-        );
-        clientCreationPage.fillContactDetails(
-                faker.internet().emailAddress(),
-                faker.regexify("\\+[0-9]{11,}"),
-                faker.address().fullAddress()
-        );
+        String clientOrganization = faker.company().name();
+        String clientSpokesperson = faker.name().fullName();
+        String clientEmail = faker.internet().emailAddress();
+        String clientPhone = faker.regexify("\\+[0-9]{11,}");
+        String clientAddress = faker.address().fullAddress();
+
+        clientCreationPage.fillOrganizationDetails(clientOrganization, clientSpokesperson);
+        clientCreationPage.fillContactDetails(clientEmail, clientPhone, clientAddress);
+
+        CONTEXT.saveData(DataKeys.CLIENT_ORGANIZATION, clientOrganization);
+        CONTEXT.saveData(DataKeys.CLIENT_SPOKESPERSON, clientSpokesperson);
+        CONTEXT.saveData(DataKeys.CLIENT_EMAIL, clientEmail);
+        CONTEXT.saveData(DataKeys.CLIENT_PHONE, clientPhone);
+        CONTEXT.saveData(DataKeys.CLIENT_ADDRESS, clientAddress);
     }
 
     @Then("user submits new client")
