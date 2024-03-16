@@ -30,6 +30,7 @@ public class DBUtils {
     public static void closeConnection() {
         try {
             connection.close();
+            connection = null;
         } catch (Exception e) {
             throw new RuntimeException("Cannot close connection", e);
         }

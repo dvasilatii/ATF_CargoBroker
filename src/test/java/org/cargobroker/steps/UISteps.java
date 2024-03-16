@@ -17,14 +17,10 @@ import org.testng.Assert;
 @Log4j2
 public class UISteps {
     private static final ScenarioContext CONTEXT = ScenarioContext.getScenarioInstance();
-    LoginPage loginPage = new LoginPage();
-    OrdersPage ordersPage = new OrdersPage();
-    OrderCreationPage orderCreationPage = new OrderCreationPage();
-    ClientsPage clientsPage = new ClientsPage();
-    ClientCreationPage clientCreationPage = new ClientCreationPage();
 
     @Given("user log in")
     public void userLogIn() {
+        LoginPage loginPage = CONTEXT.getPage(DataKeys.PAGE_LOGIN);
         loginPage.enterEmail(Utils.getProperty("username"));
         loginPage.enterPassword(Utils.getProperty("password"));
         loginPage.clickOnLogin();
@@ -40,26 +36,31 @@ public class UISteps {
 
     @And("\"create\" new order button is clicked")
     public void createOrder() {
+        OrdersPage ordersPage = CONTEXT.getPage(DataKeys.PAGE_ORDERS);
         ordersPage.clickOnCreateOrderButton();
     }
 
     @When("order params fields are filled")
     public void orderParamsFieldsAreFilled() {
+        OrderCreationPage orderCreationPage = CONTEXT.getPage(DataKeys.PAGE_ORDER_CREATION);
         orderCreationPage.fillOrderParams();
     }
 
     @And("^existing client (.+) is specified for department (.+)$")
     public void existingClientIsSpecified(String clientName, String department) {
+        OrderCreationPage orderCreationPage = CONTEXT.getPage(DataKeys.PAGE_ORDER_CREATION);
         orderCreationPage.selectClient(clientName, department);
     }
 
     @Then("user submits order")
     public void userSubmitsOrder() {
+        OrderCreationPage orderCreationPage = CONTEXT.getPage(DataKeys.PAGE_ORDER_CREATION);
         orderCreationPage.submitOrder();
     }
 
     @And("{string} message is displayed on Orders page")
     public void orderSuccessfullyCreatedMessageIsDisplayed(String message) {
+        OrdersPage ordersPage = CONTEXT.getPage(DataKeys.PAGE_ORDERS);
         String orderConfirmMessage = ordersPage.verifyOrderConfirmationMessage();
         Assert.assertTrue(orderConfirmMessage.equalsIgnoreCase(message));
 
@@ -69,6 +70,7 @@ public class UISteps {
 
     @And("\"create\" new client button is clicked")
     public void createClient() {
+        ClientsPage clientsPage = CONTEXT.getPage(DataKeys.PAGE_CLIENTS);
         clientsPage.createNewClient();
     }
 
@@ -81,6 +83,7 @@ public class UISteps {
         String clientPhone = faker.regexify("\\+[0-9]{11,}");
         String clientAddress = faker.address().fullAddress();
 
+        ClientCreationPage clientCreationPage = CONTEXT.getPage(DataKeys.PAGE_CLIENT_CREATION);
         clientCreationPage.fillOrganizationDetails(clientOrganization, clientSpokesperson);
         clientCreationPage.fillContactDetails(clientEmail, clientPhone, clientAddress);
 
@@ -93,11 +96,13 @@ public class UISteps {
 
     @Then("user submits new client")
     public void userSubmitsNewClient() {
+        ClientCreationPage clientCreationPage = CONTEXT.getPage(DataKeys.PAGE_CLIENT_CREATION);
         clientCreationPage.createClientWithParams();
     }
 
     @And("{string} message is displayed on Clients page")
     public void clientSuccessfullyCreatedMessageIsDisplayedOnClientsPage(String message) {
+        ClientsPage clientsPage = CONTEXT.getPage(DataKeys.PAGE_CLIENTS);
         String clientConfirmMessage = clientsPage.verifyClientConfirmationMessage();
         Assert.assertTrue(clientConfirmMessage.equalsIgnoreCase(message));
 
@@ -107,6 +112,7 @@ public class UISteps {
 
     @And("placed bid is added to the selected order")
     public void placedBidIsAddedToTheSelectedOrder() {
+        OrdersPage ordersPage = CONTEXT.getPage(DataKeys.PAGE_ORDERS);
         int latestOrderId = CONTEXT.getData(DataKeys.LATEST_ORDER_ID);
         WebElement order = ordersPage.findOrder(latestOrderId);
         Assert.assertNotNull(order);

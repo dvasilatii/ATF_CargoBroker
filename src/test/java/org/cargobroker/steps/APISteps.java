@@ -25,7 +25,7 @@ public class APISteps {
     public void orderListIsRetrieved() {
         Response response = APIUtils.sendRequest("get", "/order/list", null);
         CONTEXT.saveData(DataKeys.API_RESPONSE, response);
-        log.info("order list was requested");
+        log.info("order list request was performed");
     }
 
     @And("the response status code is {int}")
