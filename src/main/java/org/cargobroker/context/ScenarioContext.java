@@ -4,6 +4,7 @@ import org.cargobroker.pageObjects.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
 
 public class ScenarioContext {
     private final Map<DataKeys, Object> CONTEXT = new HashMap<>();
@@ -49,5 +50,19 @@ public class ScenarioContext {
         }
 
         return getData(key);
+    }
+
+    public void resetPages() {
+        List<DataKeys> pages = List.of(
+                DataKeys.PAGE_LOGIN,
+                DataKeys.PAGE_ORDERS,
+                DataKeys.PAGE_ORDER_CREATION,
+                DataKeys.PAGE_CLIENTS,
+                DataKeys.PAGE_CLIENT_CREATION
+        );
+
+        for (DataKeys page : pages) {
+            CONTEXT.remove(page);
+        }
     }
 }

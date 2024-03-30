@@ -11,6 +11,7 @@ import lombok.extern.log4j.Log4j2;
 import org.cargobroker.context.DataKeys;
 import org.cargobroker.context.ScenarioContext;
 import org.cargobroker.utils.APIUtils;
+import org.cargobroker.utils.Utils;
 import org.testng.Assert;
 
 import java.util.HashMap;
@@ -48,7 +49,15 @@ public class APISteps {
         Assert.assertTrue(orderList.size() != 0, "List of orders is empty");
 
         Map<String, Object> latestOrder = orderList.get(0);
+
+        for (Map<String, Object> order : orderList) {
+            if ((int) latestOrder.get("id") < (int) order.get("id")) {
+                latestOrder = order;
+            }
+        }
+
         int orderID = (int) latestOrder.get("id");
+
         log.info("latest order ID is " + orderID);
         CONTEXT.saveData(DataKeys.LATEST_ORDER_ID, orderID);
     }
@@ -57,16 +66,16 @@ public class APISteps {
     public void bidIsPlaced(DataTable dataTable) {
         Faker faker = new Faker();
         List<Map<String, String>> bidDetails = dataTable.asMaps();
-        Map<String, String> bidDetail = bidDetails.get(faker.number().numberBetween(0, bidDetails.size()));
+        Map<String, String> bidDetail = bidDetails.get(faker.number().numberBetween(0, bidDetails.size() - 1));
         int latestOrderID = CONTEXT.getData(DataKeys.LATEST_ORDER_ID);
 
         Map<String, Object> params = new HashMap<>();
-        params.put("value", faker.number().numberBetween(
-                Integer.parseInt(bidDetail.get("minAmount")),
-                Integer.parseInt(bidDetail.get("maxAmount"))
+        params.put("value", Utils.getRandomDouble(
+                Double.parseDouble(bidDetail.get("minAmount")),
+                Double.parseDouble(bidDetail.get("maxAmount"))
         ));
         params.put("currency", bidDetail.get("currency"));
-        params.put("comment", faker.harryPotter().quote());
+        params.put("comment", faker.harryPotter().quote().replace('’', '\''));
 
         Response response = APIUtils.sendRequest("post", "/order/bid/create/" + latestOrderID, params);
 

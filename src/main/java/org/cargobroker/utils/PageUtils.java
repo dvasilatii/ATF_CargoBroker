@@ -3,6 +3,7 @@ package org.cargobroker.utils;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.io.FileUtils;
+import org.cargobroker.context.ScenarioContext;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -120,6 +121,8 @@ public abstract class PageUtils {
     }
 
     public static void quit() {
+        ScenarioContext.getScenarioInstance().resetPages();
+
         driver.quit();
         driver = null;
     }

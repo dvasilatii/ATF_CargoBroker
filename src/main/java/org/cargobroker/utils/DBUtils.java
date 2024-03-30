@@ -1,6 +1,7 @@
 package org.cargobroker.utils;
 
 import lombok.extern.log4j.Log4j2;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 

@@ -8,16 +8,16 @@ import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.Properties;
+import java.util.Random;
 
 @Log4j2
 public class Utils {
     private static Properties properties;
 
-    public static String getProperty (String property) {
+    public static String getProperty(String property) {
         if (properties == null) {
             try {
-                FileInputStream fis = new FileInputStream(System.getProperty("user.dir")
-                        + "//src//main//resources//config.properties");
+                FileInputStream fis = new FileInputStream("./src/main/resources/config.properties");
                 properties = new Properties();
                 properties.load(fis);
             } catch (Exception e) {
@@ -33,11 +33,17 @@ public class Utils {
         try {
             String jsonContent = FileUtils.readFileToString(new File(filePath));
             ObjectMapper mapper = new ObjectMapper();
-            return mapper.readValue(jsonContent, new TypeReference<T>() {});
-        }
-        catch(Exception e) {
+            return mapper.readValue(jsonContent, new TypeReference<T>() {
+            });
+        } catch (Exception e) {
             log.error(e.getMessage());
             return null;
         }
+    }
+
+    public static double getRandomDouble(double min, double max) {
+        Random r = new Random();
+
+        return min + r.nextDouble() * (max - min);
     }
 }

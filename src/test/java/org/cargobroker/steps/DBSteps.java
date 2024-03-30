@@ -22,11 +22,11 @@ public class DBSteps {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(
                     "SELECT COUNT(*) AS `recordCount` FROM `Client` WHERE" +
-                            "`organization`='" + CONTEXT.getData(DataKeys.CLIENT_ORGANIZATION) + "' AND " +
-                            "`spokesperson`='" + CONTEXT.getData(DataKeys.CLIENT_SPOKESPERSON) + "' AND " +
-                            "`contact_email`='" + CONTEXT.getData(DataKeys.CLIENT_EMAIL) + "' AND " +
-                            "`contact_phone`='" + CONTEXT.getData(DataKeys.CLIENT_PHONE) + "' AND " +
-                            "`contact_address`='" + CONTEXT.getData(DataKeys.CLIENT_ADDRESS) + "'"
+                            "`organization`=" + stmt.enquoteLiteral(CONTEXT.getData(DataKeys.CLIENT_ORGANIZATION)) + " AND " +
+                            "`spokesperson`=" + stmt.enquoteLiteral(CONTEXT.getData(DataKeys.CLIENT_SPOKESPERSON)) + " AND " +
+                            "`contact_email`=" + stmt.enquoteLiteral(CONTEXT.getData(DataKeys.CLIENT_EMAIL)) + " AND " +
+                            "`contact_phone`=" + stmt.enquoteLiteral(CONTEXT.getData(DataKeys.CLIENT_PHONE)) + " AND " +
+                            "`contact_address`=" + stmt.enquoteLiteral(CONTEXT.getData(DataKeys.CLIENT_ADDRESS))
             );
 
             rs.next();

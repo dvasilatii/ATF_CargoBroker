@@ -1,12 +1,16 @@
 package org.cargobroker.pageObjects;
 
+import lombok.extern.log4j.Log4j2;
 import org.cargobroker.utils.PageUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
+@Log4j2
 public class OrdersPage extends PageUtils {
     @FindBy(xpath = "//a[@href=\"/order/create\"]")
     private WebElement createOrderButton;
@@ -42,17 +46,21 @@ public class OrdersPage extends PageUtils {
         return null;
     }
 
-    public WebElement findBidByDetails(WebElement order, int amount, String currency, String comment) {
+    public WebElement findBidByDetails(WebElement order, double amount, String currency, String comment) {
         List<WebElement> bids = order.findElements(By.cssSelector(".im-order-list-item-main-bid-list-body-item"));
+
+        NumberFormat formatter = new DecimalFormat("#0.00");
 
         for (WebElement bid : bids) {
             WebElement bidValue = bid.findElement(By.cssSelector(".im-order-list-item-main-bid-list-body-item-value"));
             WebElement bidComment = bid.findElement(By.cssSelector(".im-order-list-item-main-bid-list-body-item-meta-comment"));
 
-            if (bidValue.getText().equals(amount + ".00 " + currency) && bidComment.getText().equals(comment)) {
+            if (bidValue.getText().equals(formatter.format(amount) + " " + currency) && bidComment.getText().equals(comment)) {
                 return bid;
             }
         }
+
+        log.error("can't find bid with following details: amount=" + formatter.format(amount) + " currency=" + currency + " comment=" + comment);
 
         return null;
     }
