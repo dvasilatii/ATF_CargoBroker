@@ -1,4 +1,4 @@
-@UI @DB
+@UI @DB @Run
 Feature: Client management
 
   Scenario: Client is created

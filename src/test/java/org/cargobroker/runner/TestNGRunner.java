@@ -7,7 +7,7 @@ import io.cucumber.testng.CucumberOptions;
         features = "src/test/resources/featureFiles",
         glue = {"org.cargobroker.steps", "org.cargobroker.hooks"},
 //        monochrome = true,
-//        tags = "@Run",
+        tags = "@Run",
         plugin = {"pretty", "html:target/reports/cucumber-report.html"}
 )
 public class TestNGRunner extends AbstractTestNGCucumberTests { }
