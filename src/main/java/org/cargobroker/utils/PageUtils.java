@@ -122,7 +122,7 @@ public abstract class PageUtils {
 
     public static void quit() {
         ScenarioContext.getScenarioInstance().resetPages();
-
+//test
         driver.quit();
         driver = null;
     }
