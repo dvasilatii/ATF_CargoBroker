@@ -6,7 +6,9 @@ import org.apache.commons.io.FileUtils;
 import org.cargobroker.context.ScenarioContext;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -25,15 +27,28 @@ public abstract class PageUtils {
     public static WebDriver getDriver() {
         if (driver == null) {
             String browserName = Utils.getProperty("browser");
+            boolean isHeadless = Boolean.parseBoolean(System.getProperty("headless"));
 
             if (browserName.equalsIgnoreCase("chrome")) {
                 WebDriverManager.chromedriver().setup();
-                driver = new ChromeDriver();
+                ChromeOptions options = new ChromeOptions();
+
+                if (isHeadless) {
+                    options.addArguments("headless");
+                }
+
+                driver = new ChromeDriver(options);
             }
 
             if (browserName.equalsIgnoreCase("edge")) {
                 WebDriverManager.edgedriver().setup();
-                driver = new EdgeDriver();
+                EdgeOptions options = new EdgeOptions();
+
+                if (isHeadless) {
+                    options.addArguments("headless");
+                }
+
+                driver = new EdgeDriver(options);
             }
         }
 
