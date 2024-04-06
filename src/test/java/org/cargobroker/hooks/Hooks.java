@@ -25,7 +25,7 @@ public class Hooks {
         evidence.mkdirs();
     }
 
-    @Before("@Run")
+    @Before("@CurrentTest")
     public void setCurrentTestName(Scenario scenario) {
         String name = scenario.getName().replace(" ", "_");
         ScenarioContext.getScenarioInstance().saveData(DataKeys.TEST_CURRENT, name);

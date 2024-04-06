@@ -1,4 +1,4 @@
-@UI @API @Run
+@CurrentTest @UI @API @Run
 Feature: Bid management
 
   Scenario: Place a bid

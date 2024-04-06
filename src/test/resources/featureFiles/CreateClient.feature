@@ -1,4 +1,4 @@
-@UI @DB @Run
+@CurrentTest @UI @DB @Run
 Feature: Client management
 
   Scenario: Client is created
