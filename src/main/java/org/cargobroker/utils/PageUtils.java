@@ -27,7 +27,7 @@ public abstract class PageUtils {
     public static WebDriver getDriver() {
         if (driver == null) {
             String browserName = Utils.getProperty("browser");
-            boolean isHeadless = false;// Boolean.parseBoolean(System.getProperty("headless"));
+            boolean isHeadless = Boolean.parseBoolean(System.getProperty("headless"));
 
             if (browserName.equalsIgnoreCase("chrome")) {
                 WebDriverManager.chromedriver().setup();
