@@ -1,8 +1,10 @@
 package org.cargobroker.utils;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import lombok.Data;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.io.FileUtils;
+import org.cargobroker.context.DataKeys;
 import org.cargobroker.context.ScenarioContext;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -23,6 +25,7 @@ import java.util.HashMap;
 @Log4j2
 public abstract class PageUtils {
     private static WebDriver driver;
+    private static final ScenarioContext CONTEXT = ScenarioContext.getScenarioInstance();
 
     public static WebDriver getDriver() {
         if (driver == null) {
@@ -97,7 +100,10 @@ public abstract class PageUtils {
     public static void takeScreenshot(String id) {
         File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         String date = DateTimeFormatter.ofPattern(Utils.getProperty("screenshotDateFormat")).format(LocalDateTime.now());
-        String location = Utils.getProperty("pathToEvidence") + "/" + date + "_" + id + Utils.getProperty("screenshotExtension");
+        String location = Utils.getProperty("pathToEvidence")
+                + "/" + CONTEXT.getData(DataKeys.TEST_RUN_TIME)
+                + "/" + CONTEXT.getData(DataKeys.TEST_CURRENT)
+                + "/" + date + "_" + id + Utils.getProperty("screenshotExtension");
 
         try {
             FileUtils.copyFile(screenshot, new File(location));
