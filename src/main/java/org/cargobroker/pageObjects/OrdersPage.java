@@ -27,7 +27,7 @@ public class OrdersPage extends PageUtils {
         clickOnElement(createOrderButton);
     }
 
-    public String verifyOrderConfirmationMessage() {
+    public String getOrderConfirmationMessage() {
         return orderSuccessfullyCreatedMessage.getText();
     }
 

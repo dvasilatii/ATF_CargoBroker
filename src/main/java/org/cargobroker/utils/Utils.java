@@ -7,6 +7,8 @@ import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Properties;
 import java.util.Random;
 
@@ -45,5 +47,9 @@ public class Utils {
         Random r = new Random();
 
         return min + r.nextDouble() * (max - min);
+    }
+
+    public static String getCurrentDate() {
+        return DateTimeFormatter.ofPattern(Utils.getProperty("screenshotDateFormat")).format(LocalDateTime.now());
     }
 }

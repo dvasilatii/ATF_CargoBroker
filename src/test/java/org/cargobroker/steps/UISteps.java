@@ -61,7 +61,7 @@ public class UISteps {
     @And("{string} message is displayed on Orders page")
     public void orderSuccessfullyCreatedMessageIsDisplayed(String message) {
         OrdersPage ordersPage = CONTEXT.getPage(DataKeys.PAGE_ORDERS);
-        String orderConfirmMessage = ordersPage.verifyOrderConfirmationMessage();
+        String orderConfirmMessage = ordersPage.getOrderConfirmationMessage();
         Assert.assertTrue(orderConfirmMessage.equalsIgnoreCase(message));
 
         log.info("order was successfully created");
@@ -103,7 +103,7 @@ public class UISteps {
     @And("{string} message is displayed on Clients page")
     public void clientSuccessfullyCreatedMessageIsDisplayedOnClientsPage(String message) {
         ClientsPage clientsPage = CONTEXT.getPage(DataKeys.PAGE_CLIENTS);
-        String clientConfirmMessage = clientsPage.verifyClientConfirmationMessage();
+        String clientConfirmMessage = clientsPage.getClientConfirmationMessage();
         Assert.assertTrue(clientConfirmMessage.equalsIgnoreCase(message));
 
         log.info("client was successfully created");

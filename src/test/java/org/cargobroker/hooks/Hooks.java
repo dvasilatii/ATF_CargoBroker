@@ -12,13 +12,11 @@ import org.cargobroker.utils.Utils;
 import org.openqa.selenium.WebDriver;
 
 import java.io.File;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class Hooks {
     @BeforeAll
     public static void setRunTime() {
-        String id = DateTimeFormatter.ofPattern(Utils.getProperty("screenshotDateFormat")).format(LocalDateTime.now());
+        String id = Utils.getCurrentDate();
         ScenarioContext.getScenarioInstance().saveData(DataKeys.TEST_RUN_TIME, id);
 
         File evidence = new File(Utils.getProperty("pathToEvidence") + id);

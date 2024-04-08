@@ -18,7 +18,7 @@ public class ClientsPage extends PageUtils {
         clickOnElement(createClient);
     }
 
-    public String verifyClientConfirmationMessage() {
+    public String getClientConfirmationMessage() {
         waitWebElement(clientSuccessfullyCreatedMessage);
         return clientSuccessfullyCreatedMessage.getText();
     }

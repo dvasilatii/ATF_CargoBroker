@@ -10,8 +10,8 @@ public class APIUtils {
     public static Response sendRequest(String method, String endpoint, Map<String, Object> params) {
         RequestSpecification request = RestAssured.given();
         request.baseUri(Utils.getProperty("cargoURL"));
-        request.basePath("/api/");
-        request.header("Authorization", "Bearer " + Utils.getProperty("apiToken"));
+        request.basePath(Utils.getProperty("apiBasePath"));
+        request.header("Authorization", Utils.getProperty("apiToken"));
 
         switch (method) {
             case "get":

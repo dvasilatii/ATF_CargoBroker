@@ -24,7 +24,7 @@ public class OrderCreationPage extends PageUtils {
     }
 
     public void selectClient(String clientName, String department) {
-        selectClientDropdown.sendKeys(clientName);
+        enterFieldValue(selectClientDropdown, clientName);
         selectItemFromDropdown(selectDepartment, department);
     }
 
