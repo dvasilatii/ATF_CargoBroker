@@ -26,6 +26,7 @@ public class APISteps {
     public void orderListIsRetrieved() {
         Response response = APIUtils.sendRequest("get", "/order/list", null);
         CONTEXT.saveData(DataKeys.API_RESPONSE, response);
+        //TODO: log response body + response header
         log.info("order list request was performed");
     }
 
@@ -33,6 +34,7 @@ public class APISteps {
     public void validateStatusCode(int expectedStatusCode) {
         Response response = CONTEXT.getData(DataKeys.API_RESPONSE);
         log.info("Expected status code is: " + expectedStatusCode + ", actual status code is: " + response.statusCode());
+        //TODO: check
         Assert.assertEquals(
                 expectedStatusCode,
                 response.statusCode(),

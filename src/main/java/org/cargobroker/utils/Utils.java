@@ -45,6 +45,7 @@ public class Utils {
 
     public static double getRandomDouble(double min, double max) {
         Random r = new Random();
+        //TODO:remove higher
 
         return min + r.nextDouble() * (max - min);
     }
